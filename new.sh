@@ -1,0 +1,1 @@
+dotnet ef migrations add AddCaseDynamicDetails --project Tawasol.Infrastructure --startup-project Tawasol.API

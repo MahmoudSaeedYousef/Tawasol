@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Tawasol.API/Tawasol.API.csproj" />
+  <Project Path="Tawasol.Application/Tawasol.Application.csproj" />
+  <Project Path="Tawasol.Domain/Tawasol.Domain.csproj" />
+  <Project Path="Tawasol.Infrastructure/Tawasol.Infrastructure.csproj" />
+</Solution>

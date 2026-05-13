@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tawasol.Application.Features.Auth.Commands.Login;
+using Tawasol.Application.Features.Auth.Commands.RefreshToken;
 using Tawasol.Application.Features.Auth.Commands.Register;
 
 namespace Tawasol.API.Endpoints;
@@ -16,13 +17,22 @@ public static class AuthEndpoints
             var result = await mediator.Send(command);
             return Results.Ok(result);
         })
-        .WithName("Register");
+        .WithName("Register")
+        .RequireRateLimiting("fixed");
 
         group.MapPost("/login", async ([FromBody] LoginCommand command, ISender mediator) =>
         {
             var result = await mediator.Send(command);
             return Results.Ok(result);
         })
-        .WithName("Login");
+        .WithName("Login")
+        .RequireRateLimiting("fixed");
+
+        group.MapPost("/refresh", async ([FromBody] RefreshTokenCommand command, ISender mediator) =>
+        {
+            var result = await mediator.Send(command);
+            return Results.Ok(result);
+        })
+        .WithName("RefreshToken");
     }
 }

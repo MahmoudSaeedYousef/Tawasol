@@ -3,4 +3,4 @@ using Tawasol.Application.Common.Models;
 
 namespace Tawasol.Application.Features.Cases.Commands.RejectCase;
 
-public record RejectCaseCommand(Guid CaseId, string Reason) : IRequest<Result<bool>>;
+public record RejectCaseCommand(Guid CaseId, string Reason, Guid RejectedBy) : IRequest<Result<bool>>;

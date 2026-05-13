@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Tawasol.Application.Interfaces.Services;
 
 namespace Tawasol.Infrastructure.Services;
@@ -39,6 +40,29 @@ public class LocalFileService : IFileService
         }
 
         return $"/uploads/{folderName}/{uniqueFileName}";
+    }
+    public async Task<string> SaveFileAsync(IFormFile? file, string subFolder)
+    {
+        if (file == null || file.Length == 0) return string.Empty;
+
+        // تحديد مسار الـ wwwroot
+        var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads", subFolder);
+        
+        // إنشاء الفولدر لو مش موجود
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
+
+        // توليد اسم فريد للملف عشان نمنع التكرار (Unique Name)
+        var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+        var filePath = Path.Combine(uploadsFolder, fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        // إرجاع المسار النسبي عشان يتحفظ في الداتابيز
+        return $"/uploads/{subFolder}/{fileName}";
     }
 
     public void DeleteFile(string filePath)

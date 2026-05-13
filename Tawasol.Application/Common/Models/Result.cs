@@ -29,7 +29,7 @@ public class Result<T> : Result
 {
     public T? Data { get; private set; }
 
-    private Result(bool isSuccess, string message, T? data, List<string>? errors)
+    private protected Result(bool isSuccess, string message, T? data, List<string>? errors)
         : base(isSuccess, message, errors)
     {
         Data = data;

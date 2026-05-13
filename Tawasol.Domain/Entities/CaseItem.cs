@@ -26,7 +26,7 @@ public class CaseItem
         CaseId = caseId;
         Name = name;
         Description = description;
-        Type = type;
+        // Type = type;
         TargetAmount = targetAmount;
         IsPledged = false;
     }

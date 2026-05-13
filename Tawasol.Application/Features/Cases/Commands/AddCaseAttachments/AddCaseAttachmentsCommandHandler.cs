@@ -21,6 +21,7 @@ public class AddCaseAttachmentsCommandHandler(
 
         foreach (var file in request.Files)
         {
+            
             var filePath = await fileService.SaveFileAsync(file.Stream, file.FileName, "cases", ct);
             
             // Log for debugging

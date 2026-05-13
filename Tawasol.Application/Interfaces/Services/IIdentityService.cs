@@ -7,4 +7,5 @@ public interface IIdentityService
 {
     Task<Result<AuthResponseDto>> RegisterAsync(string fullName, string phoneNumber, string password, string role);
     Task<Result<AuthResponseDto>> LoginAsync(string phoneNumber, string password);
+    Task<Result<AuthResponseDto>> RefreshTokenAsync(string expiredToken, string refreshToken);
 }

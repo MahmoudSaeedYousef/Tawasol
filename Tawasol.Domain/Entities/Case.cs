@@ -11,11 +11,21 @@ public class Case
     public decimal TargetAmount { get; private set; }
     public decimal CollectedAmount { get; private set; }
     public CaseStatus Status { get; private set; }
-    public string CaseType { get; private set; }
+    public CaseItemType CaseType { get; private set; } // 👈 تغيير النوع لـ Enum
     public string? RejectionReason { get; private set; }
     private Dictionary<string, string> _extraDetails = new();
     public IReadOnlyDictionary<string, string> ExtraDetails => _extraDetails;
     public DateTime CreatedAt { get; private set; }
+
+    // New Administrative Fields
+    public Guid CreatedBy { get; private set; }
+    public Guid? ApprovedBy { get; private set; }
+    public DateTime? ApprovedAt { get; private set; }
+    public Guid? RejectedBy { get; private set; }
+    public DateTime? RejectedAt { get; private set; }
+    public Guid? ClosedBy { get; private set; }
+    public DateTime? ClosedAt { get; private set; }
+
 
     private readonly List<CaseAttachment> _attachments = new();
     public IReadOnlyCollection<CaseAttachment> Attachments => _attachments.AsReadOnly();
@@ -25,18 +35,20 @@ public class Case
 
     public VerificationReport? ResearchReport { get; private set; }
 
-    private Case() { } // EF Core needs this
-
-    public Case(string title, string description, decimal targetAmount, string caseType, Dictionary<string, string>? extraDetails = null)
+    private Case()
     {
-        if (string.IsNullOrWhiteSpace(title))
-            throw new DomainException("Case title cannot be empty.");
-        if (string.IsNullOrWhiteSpace(description))
-            throw new DomainException("Case description cannot be empty.");
-        if (targetAmount <= 0)
-            throw new DomainException("Target amount must be positive.");
-        if (string.IsNullOrWhiteSpace(caseType))
-            throw new DomainException("Case type is required.");
+    } // EF Core needs this
+
+    public Case(string title, string description, decimal targetAmount, CaseItemType caseType, Guid createdBy,
+        Dictionary<string, string>? extraDetails = null)
+    {
+        // if (string.IsNullOrWhiteSpace(title))
+        //     throw new DomainException("Case title cannot be empty.");
+        // if (string.IsNullOrWhiteSpace(description))
+        //     throw new DomainException("Case description cannot be empty.");
+        // if (targetAmount <= 0)
+        //     throw new DomainException("Target amount must be positive.");
+        //
 
         Id = Guid.NewGuid();
         Title = title;
@@ -47,6 +59,7 @@ public class Case
         CollectedAmount = 0;
         _extraDetails = extraDetails ?? new();
         CreatedAt = DateTime.UtcNow;
+        CreatedBy = createdBy; // Initialize CreatedBy
     }
 
     public void AddItem(string name, string description, CaseItemType type, decimal? amount = null)
@@ -62,13 +75,16 @@ public class Case
     public void AddContribution(decimal amount)
     {
         if (amount <= 0) throw new DomainException("Contribution amount must be positive.");
-        if (Status != CaseStatus.Published) throw new DomainException("Only published cases can receive contributions.");
+        if (Status != CaseStatus.Published)
+            throw new DomainException("Only published cases can receive contributions.");
+        if (Status == CaseStatus.Fulfilled || Status == CaseStatus.Closed)
+            throw new DomainException("Case is already fulfilled or closed.");
 
         CollectedAmount += amount;
 
         if (CollectedAmount >= TargetAmount)
         {
-            Status = CaseStatus.Fulfilled;
+            TransitionTo(CaseStatus.Fulfilled); // Transition to Fulfilled
         }
     }
 
@@ -82,7 +98,8 @@ public class Case
         TransitionTo(CaseStatus.Researched, report: report);
     }
 
-    public void TransitionTo(CaseStatus nextStatus, string? rejectionReason = null, VerificationReport? report = null)
+    public void TransitionTo(CaseStatus nextStatus, string? rejectionReason = null, VerificationReport? report = null,
+        Guid? actorId = null)
     {
         switch (nextStatus)
         {
@@ -98,6 +115,8 @@ public class Case
                     throw new DomainException("Only researched cases can be published.");
                 Status = CaseStatus.Published;
                 RejectionReason = null;
+                ApprovedBy = actorId; // Set ApprovedBy
+                ApprovedAt = DateTime.UtcNow; // Set ApprovedAt
                 break;
 
             case CaseStatus.Rejected:
@@ -105,6 +124,15 @@ public class Case
                     throw new DomainException("A rejection reason must be provided.");
                 Status = CaseStatus.Rejected;
                 RejectionReason = rejectionReason;
+                RejectedBy = actorId; // Set RejectedBy
+                RejectedAt = DateTime.UtcNow; // Set RejectedAt
+                break;
+
+            case CaseStatus.Fulfilled:
+                if (CollectedAmount < TargetAmount)
+                    throw new DomainException("Case cannot be fulfilled if collected amount is less than target.");
+                Status = CaseStatus.Fulfilled;
+                CloseCase(actorId); // Automatically close when fulfilled
                 break;
 
             default:
@@ -112,8 +140,17 @@ public class Case
         }
     }
 
+    public void CloseCase(Guid? actorId = null)
+    {
+        if (Status == CaseStatus.Closed) throw new DomainException("Case is already closed.");
+        Status = CaseStatus.Closed;
+        ClosedBy = actorId;
+        ClosedAt = DateTime.UtcNow;
+    }
+
     public void UpdateExtraDetails(Dictionary<string, string> details)
     {
         _extraDetails = details ?? throw new DomainException("Details cannot be null.");
     }
+
 }

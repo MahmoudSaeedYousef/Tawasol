@@ -22,7 +22,7 @@ public class ApproveCaseCommandHandler(
         if (@case == null)
             return Result<bool>.Failure("Case not found.");
 
-        @case.TransitionTo(CaseStatus.Published);
+        @case.TransitionTo(CaseStatus.Published, actorId: request.ApprovedBy); // Pass actorId
         
         // 1. Notify Researchers or potentially all users?
         // For this scenario, let's assume we notify the researcher if one was assigned

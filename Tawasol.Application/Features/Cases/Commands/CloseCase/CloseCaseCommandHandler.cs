@@ -4,22 +4,22 @@ using Tawasol.Domain.Enums;
 using Tawasol.Domain.Interfaces;
 using Tawasol.Domain.Interfaces.Repositories;
 
-namespace Tawasol.Application.Features.Cases.Commands.RejectCase;
+namespace Tawasol.Application.Features.Cases.Commands.CloseCase;
 
-public class RejectCaseCommandHandler(
+public class CloseCaseCommandHandler(
     ICaseRepository caseRepository,
     IUnitOfWork unitOfWork)
-    : IRequestHandler<RejectCaseCommand, Result<bool>>
+    : IRequestHandler<CloseCaseCommand, Result<bool>>
 {
-    public async Task<Result<bool>> Handle(RejectCaseCommand request, CancellationToken ct)
+    public async Task<Result<bool>> Handle(CloseCaseCommand request, CancellationToken ct)
     {
         var @case = await caseRepository.GetByIdAsync(request.CaseId, ct);
         if (@case == null)
             return Result<bool>.Failure("Case not found.");
 
-        @case.TransitionTo(CaseStatus.Rejected, rejectionReason: request.Reason, actorId: request.RejectedBy); // Pass actorId
+        @case.CloseCase(request.ClosedBy); // Call the domain method to close the case
         
         await unitOfWork.SaveChangesAsync(ct);
-        return Result<bool>.Success(true, "Case rejected successfully.");
+        return Result<bool>.Success(true, "Case closed successfully.");
     }
 }

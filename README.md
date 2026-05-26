@@ -9,4 +9,4 @@ pinned: false
 ---
 
 # Tawasol API
-.NET 10 Web API hosted on Hugging Face Spaces with PostgreSQL (Supabase) backend.
+.NET 10 Web API hosted on Hugging Face Spaces with PostgreSQL database (Supabase) backend.

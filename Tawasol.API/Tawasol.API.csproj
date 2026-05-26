@@ -23,4 +23,8 @@
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="obj\Debug\net10.0\" />
+  </ItemGroup>
+
 </Project>

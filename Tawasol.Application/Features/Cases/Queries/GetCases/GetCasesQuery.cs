@@ -5,4 +5,9 @@ using Tawasol.Domain.Enums;
 
 namespace Tawasol.Application.Features.Cases.Queries.GetCases;
 
-public record GetCasesQuery(List<CaseStatus> Statuses,string SearchTerm,string CategoryFilter, PaginationParams Pagination) : IRequest<PagedResult<CaseResponseDto>>;
+public record GetCasesQuery(
+    List<CaseStatus> Statuses,
+    string SearchTerm,
+    string CategoryFilter,
+    bool? isUrgent,
+    PaginationParams Pagination) : IRequest<PagedResult<CaseResponseDto>>;

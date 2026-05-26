@@ -20,12 +20,12 @@ public static class DatabaseInitializer
                 await context.Database.MigrateAsync();
             }
 
-            // Migrate Identity Database
-            var identityContext = services.GetRequiredService<AppIdentityDbContext>();
-            if (identityContext.Database.IsSqlServer())
-            {
-                await identityContext.Database.MigrateAsync();
-            }
+            // // Migrate Identity Database
+            // var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+            // if (identityContext.Database.IsSqlServer())
+            // {
+            //     await identityContext.Database.MigrateAsync();
+            // }
         }
         catch (Exception ex)
         {

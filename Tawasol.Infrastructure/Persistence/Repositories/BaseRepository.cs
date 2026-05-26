@@ -1,10 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Tawasol.Infrastructure.Persistence;
+using Tawasol.Domain.Entities;
 
 namespace Tawasol.Infrastructure.Persistence.Repositories;
 
-public abstract class BaseRepository<T>(AppDbContext context)
-    where T : class
+public abstract class BaseRepository<T>(AppDbContext context) where T : class
 {
     protected readonly AppDbContext Context = context;
 
@@ -13,9 +18,17 @@ public abstract class BaseRepository<T>(AppDbContext context)
         return await Context.Set<T>().FindAsync([id], ct);
     }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken ct = default)
+    // 🚀 تحديث ذكي: دعم فلترة البيانات اختيارياً عبر الـ Expression
+    public virtual async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null, CancellationToken ct = default)
     {
-        return await Context.Set<T>().ToListAsync(ct);
+        IQueryable<T> query = Context.Set<T>();
+        
+        if (predicate != null)
+        {
+            query = query.Where(predicate);
+        }
+        
+        return await query.ToListAsync(ct);
     }
 
     public virtual async Task AddAsync(T entity, CancellationToken ct = default)
@@ -23,7 +36,8 @@ public abstract class BaseRepository<T>(AppDbContext context)
         await Context.Set<T>().AddAsync(entity, ct);
     }
 
-    public virtual void Update(T entity)
+    // الـ EF Core بيعمل Track للتغييرات، فميثود الـ Update مجرد إعلام للسياق
+    public virtual void Update(T entity, CancellationToken ct)
     {
         Context.Set<T>().Update(entity);
     }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Tawasol.Domain.Entities;
+using Tawasol.Domain.ValueObjects;
 
 namespace Tawasol.Infrastructure.Persistence.Configurations;
 
@@ -11,6 +12,13 @@ public class CaseConfiguration : IEntityTypeConfiguration<Case>
     public void Configure(EntityTypeBuilder<Case> builder)
     {
         builder.HasKey(c => c.Id);
+
+        // Configure Location as an owned type (value object)
+        builder.OwnsOne(c => c.Location, locationBuilder =>
+        {
+            locationBuilder.Property(l => l.Latitude).HasColumnName("Location_Latitude");
+            locationBuilder.Property(l => l.Longitude).HasColumnName("Location_Longitude");
+        });
         
         builder.Property(c => c.Title)
             .IsRequired()

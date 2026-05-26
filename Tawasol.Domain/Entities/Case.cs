@@ -1,5 +1,6 @@
 using Tawasol.Domain.Enums;
 using Tawasol.Domain.Exceptions;
+using Tawasol.Domain.ValueObjects;
 
 namespace Tawasol.Domain.Entities;
 
@@ -10,12 +11,16 @@ public class Case
     public string Description { get; private set; }
     public decimal TargetAmount { get; private set; }
     public decimal CollectedAmount { get; private set; }
+    public int? Priority { get; set; }
     public CaseStatus Status { get; private set; }
     public CaseItemType CaseType { get; private set; } // 👈 تغيير النوع لـ Enum
     public string? RejectionReason { get; private set; }
     private Dictionary<string, string> _extraDetails = new();
     public IReadOnlyDictionary<string, string> ExtraDetails => _extraDetails;
     public DateTime CreatedAt { get; private set; }
+
+    // Location
+    public Location? Location { get; private set; }
 
     // New Administrative Fields
     public Guid CreatedBy { get; private set; }
@@ -39,32 +44,38 @@ public class Case
     {
     } // EF Core needs this
 
-    public Case(string title, string description, decimal targetAmount, CaseItemType caseType, Guid createdBy,
+    public Case(string title, string description,int? priority, decimal targetAmount, CaseItemType caseType, Guid createdBy, Location? location = null,
         Dictionary<string, string>? extraDetails = null)
     {
-        // if (string.IsNullOrWhiteSpace(title))
-        //     throw new DomainException("Case title cannot be empty.");
-        // if (string.IsNullOrWhiteSpace(description))
-        //     throw new DomainException("Case description cannot be empty.");
-        // if (targetAmount <= 0)
-        //     throw new DomainException("Target amount must be positive.");
-        //
-
         Id = Guid.NewGuid();
         Title = title;
         Description = description;
         TargetAmount = targetAmount;
         CaseType = caseType;
+        Priority = priority;
         Status = CaseStatus.Pending;
         CollectedAmount = 0;
         _extraDetails = extraDetails ?? new();
         CreatedAt = DateTime.UtcNow;
         CreatedBy = createdBy; // Initialize CreatedBy
+        Location = location;
     }
 
-    public void AddItem(string name, string description, CaseItemType type, decimal? amount = null)
+    public void UpdateLocation(Location location)
     {
-        _items.Add(new CaseItem(Id, name, description, type, amount));
+        Location = location;
+    }
+
+    public void AddItem(string name, string description, CaseItemType type, int targetAmount, decimal estimatedCost = 0)
+    {
+        // 🚀 التعديل الإستراتيجي: بناء الـ CaseItem بالبارامترات المحدثة الإلزامية للـ Domain
+        // وتمرير الـ targetAmount كـ int صريح للكمية المطلوبة
+        var newItem = new CaseItem(Id, name, description, type, targetAmount);
+    
+        // لو الـ CaseItem Entity عندك بتخزن الـ EstimatedCost، تقدر تسيفها هنا كدة:
+        // newItem.UpdateEstimatedCost(estimatedCost); 
+
+        _items.Add(newItem);
     }
 
     public void AddAttachment(string fileName, string filePath, string fileType)
@@ -103,15 +114,21 @@ public class Case
     {
         switch (nextStatus)
         {
+            case CaseStatus.NeedsResearch:
+                if (Status != CaseStatus.Pending && Status != CaseStatus.Researched)
+                    throw new DomainException("Only pending or researched cases can be NeedsResearch.");
+                Status = CaseStatus.NeedsResearch;
+                break;
+            
             case CaseStatus.Researched:
-                if (report == null)
-                    throw new DomainException("A Case cannot move to Researched status without a VerificationReport.");
-                ResearchReport = report;
+                if (Status != CaseStatus.Researched)
+                    throw new DomainException("Only NeedsResearch cases can be researched");
+                ResearchReport = report ?? throw new DomainException("A Case cannot move to Researched status without a VerificationReport.");
                 Status = CaseStatus.Researched;
                 break;
 
             case CaseStatus.Published:
-                if (Status != CaseStatus.Researched)
+                if (Status != CaseStatus.Pending && Status != CaseStatus.Researched)
                     throw new DomainException("Only researched cases can be published.");
                 Status = CaseStatus.Published;
                 RejectionReason = null;
@@ -120,8 +137,8 @@ public class Case
                 break;
 
             case CaseStatus.Rejected:
-                if (string.IsNullOrWhiteSpace(rejectionReason))
-                    throw new DomainException("A rejection reason must be provided.");
+                // if (string.IsNullOrWhiteSpace(rejectionReason))
+                //     throw new DomainException("A rejection reason must be provided.");
                 Status = CaseStatus.Rejected;
                 RejectionReason = rejectionReason;
                 RejectedBy = actorId; // Set RejectedBy
@@ -133,6 +150,10 @@ public class Case
                     throw new DomainException("Case cannot be fulfilled if collected amount is less than target.");
                 Status = CaseStatus.Fulfilled;
                 CloseCase(actorId); // Automatically close when fulfilled
+                break;
+
+            case CaseStatus.Closed:
+                CloseCase(actorId);
                 break;
 
             default:

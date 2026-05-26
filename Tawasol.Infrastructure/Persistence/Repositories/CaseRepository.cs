@@ -14,20 +14,52 @@ public class CaseRepository(AppDbContext context) : BaseRepository<Case>(context
             .Where(c => c.Status == status)
             .ToListAsync(ct);
     }
+    
+    public void Update(Case @case)
+    {
+        context.Cases.Update(@case);
+    }
+    public override async Task<Case?> GetByIdAsync(Guid id, CancellationToken ct = default)
+    {
+        return await context.Cases
+            .Include(c => c.Items)        // 🚀 الحل هنا: إجبار EF Core على تحميل البنود
+            .Include(c => c.Attachments)  // 🚀 وتحميل المرفقات بالمرة عشان متضربش بعدين
+            .FirstOrDefaultAsync(c => c.Id == id, ct);    }
 
-    public async Task<(IEnumerable<Case> Cases, int TotalCount)> GetCasesPagedAsync(
-        List<CaseStatus> statuses, 
-        string? searchTerm, 
-        string? categoryFilter, 
-        int pageNumber, 
-        int pageSize, 
+    public async Task<(int receivedItemCount, int closedCasesCount, decimal totalDonationAmount)> GetVillageStatsAsync( CancellationToken cancellationToken)
+    {
+        
+        var closedCasesCount = await Context.Cases.AsNoTracking().Where(c => c.Status == CaseStatus.Closed)
+            .CountAsync(cancellationToken);
+
+        var receivedItemCount= await Context.CaseItems.AsNoTracking().Where(c => c.Status == CaseItemStatus.Delivered)
+            .CountAsync(cancellationToken);
+
+        var totalAmount =  await Context.Cases.AsNoTracking()
+            .Where(c => c.Status == CaseStatus.Closed && c.CaseType == CaseItemType.Monetary)
+            .SumAsync(b => b.CollectedAmount, cancellationToken: cancellationToken);
+
+        
+        return (receivedItemCount,closedCasesCount,totalAmount);
+    }
+
+    public async Task<(IEnumerable<Case> Cases, int TotalCount)> GetCasesPagedAsync(List<CaseStatus> statuses,
+        string? searchTerm,
+        string? categoryFilter,
+        bool? isUrgent,
+        int pageNumber,
+        int pageSize,
         CancellationToken ct = default)
     {
-        var query = Context.Cases.Include(c => c.Attachments).AsQueryable();
+        var query = Context.Cases.Include(c => c.Attachments).AsNoTracking().Include(c=>c.Items).AsNoTracking().AsQueryable();
 
-        if (statuses != null && statuses.Any())
+        if (statuses.Count != 0)
         {
             query = query.Where(c => statuses.Contains(c.Status));
+        }
+        if (isUrgent.HasValue && isUrgent.Value)
+        {
+            query = query.Where(c =>c.Priority > 0 && c.Priority < 5);
         }
 
         if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -42,8 +74,15 @@ public class CaseRepository(AppDbContext context) : BaseRepository<Case>(context
 
         var totalCount = await query.CountAsync(ct);
         
-        var cases = await query
-            .OrderByDescending(c => c.CreatedAt)
+        var cases = isUrgent.HasValue && isUrgent.Value ? 
+            await query
+            .OrderBy(c => c.Priority)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(ct) 
+            : 
+            await query
+            .OrderByDescending(c =>   c.CreatedAt)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync(ct);

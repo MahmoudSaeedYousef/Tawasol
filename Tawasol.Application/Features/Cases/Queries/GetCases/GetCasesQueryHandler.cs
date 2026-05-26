@@ -15,14 +15,15 @@ public class GetCasesQueryHandler(
     public async Task<PagedResult<CaseResponseDto>> Handle(GetCasesQuery request, CancellationToken ct)
     {
         // If no statuses are provided, default to Published cases
-        var statusesToQuery = request.Statuses != null && request.Statuses.Any() 
+        var statusesToQuery = request.Statuses.Count != 0
             ? request.Statuses 
-            : new List<CaseStatus> { CaseStatus.Published };
+            : [CaseStatus.Published];
 
         var result = await caseRepository.GetCasesPagedAsync(
             statusesToQuery,
             request.SearchTerm,
             request.CategoryFilter,
+            request.isUrgent,
             request.Pagination.PageNumber,
             request.Pagination.PageSize,
             ct);

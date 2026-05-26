@@ -40,14 +40,24 @@ public static class DonationEndpoints
         .DisableAntiforgery();
 
         // In-Kind Pledge
-        group.MapPost("/pledge", [Authorize] async ([FromBody] PledgeRequest request, ClaimsPrincipal user, ISender mediator) =>
+        group.MapPost("/pledge", [Authorize] async ([FromBody] PledgeRequestDto request, ClaimsPrincipal user, ISender mediator) =>
         {
             var donorId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var command = new PledgeInKindDonationCommand(donorId, request.CaseId, request.CaseItemId);
+            var command = new PledgeInKindDonationCommand(donorId, request.CaseId, request.CaseItemId,request.Quantity, request.Condition, request.EvidencePhotoUrl);
             var result = await mediator.Send(command);
             return Results.Ok(result);
         })
         .WithName("PledgeInKind");
+        
+        group.MapPost("/cancel-pledge", async ([FromBody] CancelPledgeInKindDonationCommand command, ClaimsPrincipal user, ISender mediator) =>
+            {
+                if (!user.IsInRole("Hakim") && !user.IsInRole("Researcher") && !user.IsInRole("Admin"))
+                    return Results.Forbid();
+
+                var result = await mediator.Send(command);
+                return result.IsSuccess ? Results.Ok(result) : Results.BadRequest(result.Errors);
+            })
+            .RequireAuthorization();
 
         // Donate to General Fund
         group.MapPost("/fund", [Authorize] async (IFormCollection form, ClaimsPrincipal user, ISender mediator) =>
@@ -69,10 +79,28 @@ public static class DonationEndpoints
         .WithName("DonateToFund");
 
         // Confirm Delivery (Hakim/Researcher)
-        group.MapPatch("/{id:guid}/confirm-delivery", [Authorize(Roles = "Hakim,Researcher")] async (Guid id, IFormFile proofFile, ISender mediator) =>
+        group.MapPatch("/{caseItemId:guid}/confirm-delivery", [Authorize(Roles = "Hakim,Researcher")] async (Guid caseItemId, IFormCollection form, ClaimsPrincipal user, ISender mediator) =>
         {
+            var lat = double.Parse(form["latitude"]!);
+            var lon = double.Parse(form["longitude"]!);
+            var deliveredQuantity = int.Parse(form["deliveredQuantity"]!);
+            var proofFile = form.Files.GetFile("deliveryPhoto");
+
+            if (proofFile == null) return Results.BadRequest("Delivery photo is required.");
+
             var fileModel = new FileModel(proofFile.OpenReadStream(), proofFile.FileName, proofFile.ContentType);
-            var result = await mediator.Send(new ConfirmDeliveryCommand(id, fileModel));
+            var confirmedByUserId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new ConfirmDeliveryCommand
+            {
+                CaseItemId = caseItemId,
+                DeliveredQuantity = deliveredQuantity,
+                Latitude = lat,
+                Longitude = lon,
+                DeliveryPhoto = fileModel,
+                ConfirmedByUserId = confirmedByUserId
+            };
+            
+            var result = await mediator.Send(command);
             return Results.Ok(result);
         })
         .DisableAntiforgery()
@@ -94,4 +122,3 @@ public static class DonationEndpoints
         .WithName("GetMyDonationHistory");
     }
 }
-

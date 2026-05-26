@@ -24,4 +24,5 @@ public class CaseResponseDto
     public Guid? DeletedBy { get; set; }
     public DateTime? DeletedAt { get; set; }
     public List<string> AttachmentUrls { get; set; } = new();
+    public List<CaseItemDto> Items { get; set; } = new();
 }

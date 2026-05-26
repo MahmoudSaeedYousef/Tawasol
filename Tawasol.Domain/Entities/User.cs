@@ -1,22 +1,25 @@
+using Microsoft.AspNetCore.Identity;
 using Tawasol.Domain.Enums;
 using Tawasol.Domain.Exceptions;
+using Microsoft.AspNetCore.Identity;
+using Tawasol.Domain.Exceptions; // تأكد من الـ Namespace الخاص بالـ DomainException بتاعك
 
 namespace Tawasol.Domain.Entities;
 
-public class User
+public class User : IdentityUser<Guid>
 {
-    public Guid Id { get; private set; }
-    public string FullName { get; private set; }
-    public string PhoneNumber { get; private set; }
+
+    public string FullName { get; private set; } = string.Empty;
     public int Points { get; private set; }
+    public int VerifiedDeliveriesCount { get; private set; }
     public string? DeviceToken { get; private set; }
     public UserRole Role { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
-    private User() { }
+    private User() : base() { }
 
-    public User(string fullName, string phoneNumber, UserRole role)
+    public User(string fullName, string phoneNumber, UserRole role) : base()
     {
         if (string.IsNullOrWhiteSpace(fullName))
             throw new DomainException("Full name is required.");
@@ -25,9 +28,14 @@ public class User
 
         Id = Guid.NewGuid();
         FullName = fullName;
+        
+        // 🚀 الـ Identity يعتمد على الـ UserName والـ PhoneNumber
         PhoneNumber = phoneNumber;
+        UserName = phoneNumber; // نستخدم رقم الهاتف كـ اسـم مستخدم لسهولة اللوجن
+        
         Role = role;
         Points = 0;
+        VerifiedDeliveriesCount = 0;
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
     }
@@ -51,6 +59,11 @@ public class User
     {
         if (amount < 0) throw new DomainException("Points cannot be negative.");
         Points += amount;
+    }
+
+    public void IncrementVerifiedDeliveries()
+    {
+        VerifiedDeliveriesCount++;
     }
 
     public void Deactivate()

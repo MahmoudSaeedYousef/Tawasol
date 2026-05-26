@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Threading.RateLimiting;
+using Coravel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +11,9 @@ using Serilog;
 using Tawasol.API.Endpoints;
 using Tawasol.API.Middleware;
 using Tawasol.Application;
+using Tawasol.Application.BackgroundJobs;
 using Tawasol.Infrastructure;
+using Tawasol.Infrastructure.Hubs;
 using Tawasol.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -99,18 +102,23 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.SetIsOriginAllowed(_ => true) // allow any origin
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials(); // SignalR requires credentials
     });
 });
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase; // ده بيخلي الـ API تخرج البيانات بصيغة camelCase أوتوماتيكياً
-        options.JsonSerializerOptions.WriteIndented = true; // ده بيخلي الـ JSON اللي راجع من الـ API يكون منسق وواضح
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase; 
+        options.JsonSerializerOptions.WriteIndented = true; 
     });
+
+// Coravel Scheduler
+builder.Services.AddScheduler();
+builder.Services.AddTransient<PledgeExpirationJob>();
 
 var app = builder.Build();
 
@@ -127,6 +135,7 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty;
     });
 
+    // Temporarily disable automatic migration to break the cycle
     await DatabaseInitializer.InitializeDatabaseAsync(app.Services);
     await IdentityDataSeeder.SeedDataAsync(app.Services);
 }
@@ -139,6 +148,13 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Setup Coravel Job
+app.Services.UseScheduler(scheduler =>
+{
+    scheduler.Schedule<PledgeExpirationJob>()
+             .Hourly(); // Runs every hour to check for 24h old pledges
+});
+
 // 4. Endpoint Mapping
 app.MapHealthChecks("/health");
 app.MapAuthEndpoints();
@@ -146,6 +162,7 @@ app.MapCaseEndpoints();
 app.MapDonationEndpoints();
 app.MapUserEndpoints();
 app.MapAdminEndpoints();
+app.MapHub<CaseHub>("/hubs/cases");
 app.MapGet("/ping", () => "pong");
 
 try

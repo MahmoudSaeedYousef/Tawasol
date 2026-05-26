@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -10,137 +14,122 @@ using Tawasol.Application.DTOs.Auth;
 using Tawasol.Application.Interfaces.Services;
 using Tawasol.Domain.Entities;
 using Tawasol.Domain.Enums;
+using Tawasol.Domain.Interfaces.Repositories;
 
-namespace Tawasol.Infrastructure.Identity;
-
-public class IdentityService(
-    UserManager<User> userManager,
-    SignInManager<User> signInManager,
-    IConfiguration configuration)
-    : IIdentityService
+namespace Tawasol.Infrastructure.Identity
 {
-    public async Task<Result<AuthResponseDto>> RegisterAsync(string fullName, string phoneNumber, string password, string role)
+    public class IdentityService : IIdentityService
     {
-        // Correctly create a domain User instance
-        var user = new User(fullName, phoneNumber, Enum.Parse<UserRole>(role, true));
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserRepository _userRepository;
+        private readonly IConfiguration _configuration;
 
-        var result = await userManager.CreateAsync(user, password);
-
-        if (!result.Succeeded)
+        public IdentityService(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IUserRepository userRepository,
+            IConfiguration configuration)
         {
-            return Result<AuthResponseDto>.Failure(result.Errors.Select(e => e.Description).ToList(), "Registration failed");
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _userRepository = userRepository;
+            _configuration = configuration;
         }
 
-        await userManager.AddToRoleAsync(user, role);
-
-        return await GenerateAuthResponse(user, new List<string> { role });
-    }
-
-    public async Task<Result<AuthResponseDto>> LoginAsync(string phoneNumber, string password)
-    {
-        var user = await userManager.FindByNameAsync(phoneNumber);
-
-        if (user == null || !await userManager.CheckPasswordAsync(user, password))
+        public async Task<Result<AuthResponseDto>> RegisterAsync(string fullName, string phoneNumber, string password, string role)
         {
-            return Result<AuthResponseDto>.Failure("Invalid phone number or password");
+            var appUser = new ApplicationUser { UserName = phoneNumber, PhoneNumber = phoneNumber };
+            var identityResult = await _userManager.CreateAsync(appUser, password);
+
+            if (!identityResult.Succeeded)
+            {
+                return Result<AuthResponseDto>.Failure(identityResult.Errors.Select(e => e.Description).ToList());
+            }
+
+            var domainUser = new User(fullName, phoneNumber, Enum.Parse<UserRole>(role, true));
+            // Manually set the domain user's ID to match the identity user's ID
+            typeof(User).GetProperty("Id").SetValue(domainUser, appUser.Id);
+            
+            await _userRepository.AddAsync(domainUser);
+
+            await _userManager.AddToRoleAsync(appUser, role);
+
+            return await GenerateAuthResponse(appUser, domainUser, new List<string> { role });
         }
 
-        var roles = await userManager.GetRolesAsync(user);
-        return await GenerateAuthResponse(user, roles);
-    }
-
-    public async Task<Result<AuthResponseDto>> RefreshTokenAsync(string expiredToken, string refreshToken)
-    {
-        var principal = GetPrincipalFromExpiredToken(expiredToken);
-        if (principal == null) return Result<AuthResponseDto>.Failure("Invalid token");
-
-        var userId = principal.FindFirstValue(ClaimTypes.NameIdentifier);
-        var user = await userManager.FindByIdAsync(userId!);
-
-        // Refresh token logic should be implemented in the User entity if needed, or managed here.
-        // For now, assuming it's not part of the core domain User properties.
-        // if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-        // {
-        //     return Result<AuthResponseDto>.Failure("Invalid refresh token");
-        // }
-
-        var roles = await userManager.GetRolesAsync(user);
-        return await GenerateAuthResponse(user, roles);
-    }
-
-    private async Task<Result<AuthResponseDto>> GenerateAuthResponse(User user, IEnumerable<string> roles)
-    {
-        var token = GenerateJwtToken(user, roles);
-        var refreshToken = GenerateRefreshToken();
-
-        // Refresh token logic is not part of the domain User entity.
-        // await userManager.UpdateAsync(user);
-
-        return Result<AuthResponseDto>.Success(new AuthResponseDto(
-            user.Id.ToString(),
-            token,
-            refreshToken,
-            user.FullName,
-            user.PhoneNumber!,
-            roles.FirstOrDefault() ?? "GeneralUser",
-            user.Points,
-            user.GetTitle() // Use the domain method to get the title
-        ));
-    }
-
-    private string GenerateJwtToken(User user, IEnumerable<string> roles)
-    {
-        var claims = new List<Claim>
+        public async Task<Result<AuthResponseDto>> LoginAsync(string phoneNumber, string password)
         {
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.UserName!),
-            new("FullName", user.FullName)
-        };
+            var appUser = await _userManager.FindByNameAsync(phoneNumber);
+            if (appUser == null) return Result<AuthResponseDto>.Failure("Invalid phone number or password");
 
-        foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
+            var result = await _signInManager.CheckPasswordSignInAsync(appUser, password, false);
+            if (!result.Succeeded) return Result<AuthResponseDto>.Failure("Invalid phone number or password");
+
+            var domainUser = await _userRepository.GetByIdAsync(appUser.Id);
+            if (domainUser == null) return Result<AuthResponseDto>.Failure("User data not found.");
+
+            var roles = await _userManager.GetRolesAsync(appUser);
+            return await GenerateAuthResponse(appUser, domainUser, roles);
         }
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var token = new JwtSecurityToken(
-            issuer: configuration["Jwt:Issuer"],
-            audience: configuration["Jwt:Audience"],
-            claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(15), // Short-lived access token
-            signingCredentials: creds
-        );
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
-    }
-
-    private string GenerateRefreshToken()
-    {
-        var randomNumber = new byte[32];
-        using var rng = RandomNumberGenerator.Create();
-        rng.GetBytes(randomNumber);
-        return Convert.ToBase64String(randomNumber);
-    }
-
-    private ClaimsPrincipal? GetPrincipalFromExpiredToken(string token)
-    {
-        var tokenValidationParameters = new TokenValidationParameters
+        public Task<Result<AuthResponseDto>> RefreshTokenAsync(string expiredToken, string refreshToken)
         {
-            ValidateAudience = false,
-            ValidateIssuer = false,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!)),
-            ValidateLifetime = false
-        };
+            // This needs to be re-implemented based on the new separation.
+            // For now, returning a failure.
+            return Task.FromResult(Result<AuthResponseDto>.Failure("RefreshToken not implemented."));
+        }
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
+        private async Task<Result<AuthResponseDto>> GenerateAuthResponse(ApplicationUser appUser, User domainUser, IEnumerable<string> roles)
+        {
+            var token = GenerateJwtToken(appUser, roles);
+            var refreshToken = GenerateRefreshToken();
 
-        if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-            return null;
+            return Result<AuthResponseDto>.Success(new AuthResponseDto(
+                domainUser.Id.ToString(),
+                token,
+                refreshToken,
+                domainUser.FullName,
+                domainUser.PhoneNumber,
+                roles.FirstOrDefault() ?? "GeneralUser",
+                domainUser.Points,
+                domainUser.GetTitle()
+            ));
+        }
 
-        return principal;
+        private string GenerateJwtToken(ApplicationUser user, IEnumerable<string> roles)
+        {
+            var claims = new List<Claim>
+            {
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.UserName),
+            };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(15),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
+        }
     }
 }

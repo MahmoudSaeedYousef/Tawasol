@@ -1,13 +1,17 @@
+using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Tawasol.Domain.Entities;
+using Tawasol.Infrastructure.Identity;
 
 namespace Tawasol.Infrastructure.Persistence;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options)
-    : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
+    : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options)
 {
+    // Domain Entities
+    public DbSet<User> DomainUsers => Set<User>();
     public DbSet<Case> Cases => Set<Case>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
     public DbSet<Notification> Notifications => Set<Notification>();
@@ -19,19 +23,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // 1. 🚀 تشغيل مابينج الـ Identity الأساسي أولاً (خطوة إجبارية)
         base.OnModelCreating(modelBuilder);
-    
-        // 2. 🚀 إلزام الـ EF بالأسماء الموحدة النظيفة لمنع التضارب
-        modelBuilder.Entity<User>(b => b.ToTable("AspNetUsers"));
-        modelBuilder.Entity<IdentityRole<Guid>>(b => b.ToTable("AspNetRoles"));
-        modelBuilder.Entity<IdentityUserRole<Guid>>(b => b.ToTable("AspNetUserRoles"));
-        modelBuilder.Entity<IdentityUserClaim<Guid>>(b => b.ToTable("AspNetUserClaims"));
-        modelBuilder.Entity<IdentityUserLogin<Guid>>(b => b.ToTable("AspNetUserLogins"));
-        modelBuilder.Entity<IdentityRoleClaim<Guid>>(b => b.ToTable("AspNetRoleClaims"));
-        modelBuilder.Entity<IdentityUserToken<Guid>>(b => b.ToTable("AspNetUserTokens"));
 
-        // 3. تطبيق مابينج الجداول الخاصة بالبيزنس بتاعتك
+        // Map the domain User to the "Users" table
+        modelBuilder.Entity<User>().ToTable("Users");
+        
+        // Identity tables will be mapped by IdentityDbContext to AspNet* tables by default.
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 }

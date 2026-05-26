@@ -1,0 +1,11 @@
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/bin/Debug/net8.0/Tawasol.Domain.deps.json
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/bin/Debug/net8.0/Tawasol.Domain.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/bin/Debug/net8.0/Tawasol.Domain.pdb
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/Tawasol.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/Tawasol.Domain.AssemblyInfoInputs.cache
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/Tawasol.Domain.AssemblyInfo.cs
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/Tawasol.Domain.csproj.CoreCompileInputs.cache
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/Tawasol.Domain.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/refint/Tawasol.Domain.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/Tawasol.Domain.pdb
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Domain/obj/Debug/net8.0/ref/Tawasol.Domain.dll

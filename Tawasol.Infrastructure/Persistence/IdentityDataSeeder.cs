@@ -42,7 +42,7 @@ public static class IdentityDataSeeder
 
             // بما إن الـ Points محروقة بـ private set وبتبدأ بـ 0، هنرفعها للـ Admin عن طريق ميثود الـ Domain
             newAdmin.AddPoints(1000); 
-            newAdmin.PhoneNumberConfirmed = true; // خاصية موروثه من مايكروسوفت نرفعها عادي
+            // newAdmin.PhoneNumberConfirmed = true; // خاصية موروثه من مايكروسوفت نرفعها عادي
 
             // كريت الـ User جوه جداول الـ Identity مع الباسورد
             var result = await userManager.CreateAsync(newAdmin, "000000");

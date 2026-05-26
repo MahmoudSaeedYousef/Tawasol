@@ -1,41 +1,40 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Tawasol.Domain.Entities;
 using Tawasol.Domain.Interfaces.Repositories;
-using Microsoft.AspNetCore.Identity;
-using Tawasol.Domain.Exceptions;
 
-namespace Tawasol.Infrastructure.Persistence.Repositories;
-
-public class UserRepository(UserManager<User> userManager) : IUserRepository
+namespace Tawasol.Infrastructure.Persistence.Repositories
 {
-    public async Task<User?> GetByIdAsync(Guid id, CancellationToken ct = default)
+    public class UserRepository : IUserRepository
     {
-        return await userManager.FindByIdAsync(id.ToString());
-    }
+        private readonly AppDbContext _context;
 
-    public async Task<User?> GetByPhoneAsync(string phone, CancellationToken ct = default)
-    {
-        // 🚀 استخدام FindByNameAsync أسرع وأضمن لأننا مسيفين الـ Phone جوة الـ UserName
-        return await userManager.FindByNameAsync(phone);
-    }
-
-    public async Task AddAsync(User user, CancellationToken ct = default)
-    {
-        var result = await userManager.CreateAsync(user);
-        if (!result.Succeeded)
+        public UserRepository(AppDbContext context)
         {
-            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-            throw new DomainException($"Failed to add user: {errors}"); // يفضل استخدام الـ DomainException بتاعك
+            _context = context;
         }
-    }
 
-    public async Task UpdateAsync(User user)
-    {
-        // 🚀 تشغيل الـ Async الحقيقي وحماية الـ Threads من الـ Block
-        var result = await userManager.UpdateAsync(user);
-        if (!result.Succeeded)
+        public async Task<User?> GetByIdAsync(Guid id, CancellationToken ct = default)
         {
-            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-            throw new DomainException($"Failed to update user: {errors}");
+            return await _context.DomainUsers.FindAsync(new object[] { id }, ct);
+        }
+
+        public async Task<User?> GetByPhoneAsync(string phone, CancellationToken ct = default)
+        {
+            return await _context.DomainUsers.FirstOrDefaultAsync(u => u.PhoneNumber == phone, ct);
+        }
+
+        public async Task AddAsync(User user, CancellationToken ct = default)
+        {
+            await _context.DomainUsers.AddAsync(user, ct);
+        }
+
+        public Task UpdateAsync(User user)
+        {
+            _context.DomainUsers.Update(user);
+            return Task.CompletedTask;
         }
     }
 }

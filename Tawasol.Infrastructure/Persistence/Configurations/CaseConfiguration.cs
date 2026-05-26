@@ -55,7 +55,7 @@ public class CaseConfiguration : IEntityTypeConfiguration<Case>
                     c => JsonSerializer.Deserialize<Dictionary<string, string>>(JsonSerializer.Serialize(c, options), options)!
                 )
             )
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
             
         builder.HasMany(c => c.Attachments)
             .WithOne()

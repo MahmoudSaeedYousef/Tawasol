@@ -1,0 +1,894 @@
+2026-05-26 15:28:14.139 +03:00 [ERR] An error occurred using the connection to database 'TawasolDb' on server ''.
+2026-05-26 15:52:27.333 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://db.vuqhtbqqxrekhjunkwbu.supabase.co:5432'.
+2026-05-26 15:54:12.633 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 15:55:47.811 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 15:56:02.518 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:01:04.602 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:08:20.562 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:09:45.694 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:12:57.099 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:15:09.728 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://db.vuqhtbqqxrekhjunkwbu.supabase.co:5432'.
+2026-05-26 16:26:21.160 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:27:28.914 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://18.192.148.243:5432'.
+2026-05-26 16:36:59.854 +03:00 [INF] User profile is available. Using '/Users/mahmoudsaeed/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-05-26 16:37:03.170 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:6543'.
+2026-05-26 16:37:03.193 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Tawasol.Infrastructure.Persistence.AppDbContext'.
+Npgsql.PostgresException (0x80004005): XX000: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: XX000
+    MessageText: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+Npgsql.PostgresException (0x80004005): XX000: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: XX000
+    MessageText: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+2026-05-26 16:41:19.309 +03:00 [INF] User profile is available. Using '/Users/mahmoudsaeed/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-05-26 16:41:19.772 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://db.vuqhtbqqxrekhjunkwbu.supabase.co:5432'.
+2026-05-26 16:41:19.782 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Tawasol.Infrastructure.Persistence.AppDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to [2a05:d014:1e9b:b301:c08d:80a2:9979:7f5d]:5432
+ ---> System.Net.Sockets.SocketException (65): No route to host
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError error, Boolean forAsyncThrow)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ConnectAsync(Socket socket, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.ConnectAsync(EndPoint remoteEP, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.FinishSlow(Boolean userDelegateExecute)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+--- End of stack trace from previous location ---
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to [2a05:d014:1e9b:b301:c08d:80a2:9979:7f5d]:5432
+ ---> System.Net.Sockets.SocketException (65): No route to host
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError error, Boolean forAsyncThrow)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ConnectAsync(Socket socket, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.ConnectAsync(EndPoint remoteEP, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.FinishSlow(Boolean userDelegateExecute)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+--- End of stack trace from previous location ---
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-05-26 16:47:21.746 +03:00 [INF] User profile is available. Using '/Users/mahmoudsaeed/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-05-26 16:47:22.016 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Tawasol.Infrastructure.Persistence.AppDbContext'.
+System.ArgumentException: Format of the initialization string does not conform to specification starting at index 0.
+   at System.Data.Common.DbConnectionOptions.GetKeyValuePair(String connectionString, Int32 currentPosition, StringBuilder buffer, Boolean useOdbcRules, String& keyname, String& keyvalue)
+   at System.Data.Common.DbConnectionOptions.ParseInternal(Dictionary`2 parsetable, String connectionString, Boolean buildChain, Dictionary`2 synonyms, Boolean firstKey)
+   at System.Data.Common.DbConnectionOptions..ctor(String connectionString, Dictionary`2 synonyms, Boolean useOdbcRules)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnectionStringBuilder..ctor(String connectionString)
+   at Npgsql.NpgsqlConnection.SetupDataSource()
+   at Npgsql.NpgsqlConnection.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnection..ctor(String connectionString)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlRelationalConnection.CreateDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.get_DbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.ArgumentException: Format of the initialization string does not conform to specification starting at index 0.
+   at System.Data.Common.DbConnectionOptions.GetKeyValuePair(String connectionString, Int32 currentPosition, StringBuilder buffer, Boolean useOdbcRules, String& keyname, String& keyvalue)
+   at System.Data.Common.DbConnectionOptions.ParseInternal(Dictionary`2 parsetable, String connectionString, Boolean buildChain, Dictionary`2 synonyms, Boolean firstKey)
+   at System.Data.Common.DbConnectionOptions..ctor(String connectionString, Dictionary`2 synonyms, Boolean useOdbcRules)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnectionStringBuilder..ctor(String connectionString)
+   at Npgsql.NpgsqlConnection.SetupDataSource()
+   at Npgsql.NpgsqlConnection.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnection..ctor(String connectionString)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlRelationalConnection.CreateDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.get_DbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-05-26 16:48:01.212 +03:00 [INF] User profile is available. Using '/Users/mahmoudsaeed/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-05-26 16:48:03.654 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-0-eu-central-1.pooler.supabase.com:5432'.
+2026-05-26 16:48:03.681 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Tawasol.Infrastructure.Persistence.AppDbContext'.
+Npgsql.PostgresException (0x80004005): XX000: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: XX000
+    MessageText: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+Npgsql.PostgresException (0x80004005): XX000: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: XX000
+    MessageText: (ENOTFOUND) tenant/user postgres.vuqhtbqqxrekhjunkwbu not found
+2026-05-26 16:51:52.560 +03:00 [INF] User profile is available. Using '/Users/mahmoudsaeed/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2026-05-26 16:51:54.044 +03:00 [INF] Executed DbCommand (147ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+2026-05-26 16:51:54.137 +03:00 [INF] Executed DbCommand (70ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+2026-05-26 16:51:54.346 +03:00 [INF] Executed DbCommand (68ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-26 16:51:54.449 +03:00 [INF] Executed DbCommand (93ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+2026-05-26 16:51:54.510 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+2026-05-26 16:51:54.657 +03:00 [INF] Executed DbCommand (142ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-26 16:51:54.718 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+2026-05-26 16:51:54.782 +03:00 [INF] Executed DbCommand (64ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+2026-05-26 16:51:54.843 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetRoles" ("Id", "ConcurrencyStamp", "Name", "NormalizedName")
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-26 16:51:54.915 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[@normalizedUserName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."CreatedAt", a."DeviceToken", a."Email", a."EmailConfirmed", a."FullName", a."IsActive", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Points", a."Role", a."SecurityStamp", a."TwoFactorEnabled", a."UserName", a."VerifiedDeliveriesCount"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @normalizedUserName
+LIMIT 1
+2026-05-26 16:51:55.046 +03:00 [INF] Executed DbCommand (81ms) [Parameters=[@normalizedUserName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."CreatedAt", a."DeviceToken", a."Email", a."EmailConfirmed", a."FullName", a."IsActive", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Points", a."Role", a."SecurityStamp", a."TwoFactorEnabled", a."UserName", a."VerifiedDeliveriesCount"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @normalizedUserName
+LIMIT 1
+2026-05-26 16:51:55.194 +03:00 [INF] Executed DbCommand (98ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?', @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Boolean), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime), @p11='?', @p12='?', @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?' (DbType = Int32), @p17='?', @p18='?', @p19='?' (DbType = Boolean), @p20='?', @p21='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DeviceToken", "Email", "EmailConfirmed", "FullName", "IsActive", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Points", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "VerifiedDeliveriesCount")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-05-26 16:51:55.267 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+2026-05-26 16:51:55.399 +03:00 [INF] Executed DbCommand (74ms) [Parameters=[@p='?' (DbType = Guid), @p1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @p AND a."RoleId" = @p1
+LIMIT 1
+2026-05-26 16:51:55.476 +03:00 [INF] Executed DbCommand (73ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+2026-05-26 16:51:55.558 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[@normalizedUserName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."CreatedAt", a."DeviceToken", a."Email", a."EmailConfirmed", a."FullName", a."IsActive", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Points", a."Role", a."SecurityStamp", a."TwoFactorEnabled", a."UserName", a."VerifiedDeliveriesCount"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @normalizedUserName
+LIMIT 1
+2026-05-26 16:51:55.705 +03:00 [INF] Executed DbCommand (120ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p23='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?', @p24='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?', @p9='?' (DbType = Boolean), @p10='?' (DbType = Boolean), @p11='?' (DbType = DateTime), @p12='?', @p13='?', @p14='?', @p15='?', @p16='?' (DbType = Boolean), @p17='?' (DbType = Int32), @p18='?', @p19='?', @p20='?' (DbType = Boolean), @p21='?', @p22='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "CreatedAt" = @p4, "DeviceToken" = @p5, "Email" = @p6, "EmailConfirmed" = @p7, "FullName" = @p8, "IsActive" = @p9, "LockoutEnabled" = @p10, "LockoutEnd" = @p11, "NormalizedEmail" = @p12, "NormalizedUserName" = @p13, "PasswordHash" = @p14, "PhoneNumber" = @p15, "PhoneNumberConfirmed" = @p16, "Points" = @p17, "Role" = @p18, "SecurityStamp" = @p19, "TwoFactorEnabled" = @p20, "UserName" = @p21, "VerifiedDeliveriesCount" = @p22
+WHERE "Id" = @p23 AND "ConcurrencyStamp" = @p24;
+2026-05-26 16:51:55.835 +03:00 [INF] >>> Tawasol API Starting...
+2026-05-26 16:51:56.344 +03:00 [INF] Now listening on: http://localhost:5044
+2026-05-26 16:51:56.346 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-26 16:51:56.346 +03:00 [INF] Hosting environment: Development
+2026-05-26 16:51:56.346 +03:00 [INF] Content root path: /Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.API
+2026-05-26 16:51:58.742 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/index.html - null null
+2026-05-26 16:51:58.823 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/index.html - 200 null text/html;charset=utf-8 85.343ms
+2026-05-26 16:51:58.983 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - null null
+2026-05-26 16:51:58.988 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2026-05-26 16:51:59.065 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 82.5354ms
+2026-05-26 16:52:38.052 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5044/api/auth/login - application/json 53
+2026-05-26 16:52:38.071 +03:00 [WRN] Failed to determine the https port for redirect.
+2026-05-26 16:52:38.074 +03:00 [INF] CORS policy execution successful.
+2026-05-26 16:52:38.185 +03:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2026-05-26 16:52:38.298 +03:00 [INF] Executed DbCommand (72ms) [Parameters=[@normalizedUserName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."CreatedAt", a."DeviceToken", a."Email", a."EmailConfirmed", a."FullName", a."IsActive", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Points", a."Role", a."SecurityStamp", a."TwoFactorEnabled", a."UserName", a."VerifiedDeliveriesCount"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @normalizedUserName
+LIMIT 1
+2026-05-26 16:52:38.530 +03:00 [INF] Executed DbCommand (145ms) [Parameters=[@userId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @userId
+2026-05-26 16:52:38.562 +03:00 [INF] Setting HTTP status code 200.
+2026-05-26 16:52:38.565 +03:00 [INF] Writing value of type 'Result`1' as Json.
+2026-05-26 16:52:38.572 +03:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2026-05-26 16:52:38.584 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5044/api/auth/login - 200 null application/json; charset=utf-8 532.896ms
+2026-05-26 17:00:00.542 +03:00 [INF] >>> Running PledgeExpirationJob (Quantity-Aware)...
+2026-05-26 17:00:02.798 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-1-eu-central-1.pooler.supabase.com:5432'.
+2026-05-26 17:00:02.821 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Tawasol.Infrastructure.Persistence.AppDbContext'.
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "postgres"
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "postgres"
+2026-05-26 17:44:35.515 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/index.html - null null
+2026-05-26 17:44:35.515 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/index.html - null null
+2026-05-26 17:44:35.515 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/index.html - null null
+2026-05-26 17:44:35.515 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/index.html - null null
+2026-05-26 17:44:35.593 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/index.html - 200 null text/html;charset=utf-8 78.0444ms
+2026-05-26 17:44:35.593 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/index.html - 200 null text/html;charset=utf-8 78.0993ms
+2026-05-26 17:44:35.593 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/index.html - 200 null text/html;charset=utf-8 78.1096ms
+2026-05-26 17:44:35.593 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/index.html - 200 null text/html;charset=utf-8 78.1136ms
+2026-05-26 17:44:35.603 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui.css - null null
+2026-05-26 17:44:35.603 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui.css - null null
+2026-05-26 17:44:35.603 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui.css - null null
+2026-05-26 17:44:35.603 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui.css - null null
+2026-05-26 17:44:35.605 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - null null
+2026-05-26 17:44:35.605 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - null null
+2026-05-26 17:44:35.647 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-05-26 17:44:35.647 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-05-26 17:44:35.647 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-05-26 17:44:35.647 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-05-26 17:44:35.647 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.647 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui.css - 200 144929 text/css 44.3754ms
+2026-05-26 17:44:35.647 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui.css - 200 144929 text/css 44.3871ms
+2026-05-26 17:44:35.647 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.648 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui.css - 200 144929 text/css 44.4937ms
+2026-05-26 17:44:35.648 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui.css - 200 144929 text/css 44.5511ms
+2026-05-26 17:44:35.648 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - 200 1061536 text/javascript 43.0096ms
+2026-05-26 17:44:35.649 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - null null
+2026-05-26 17:44:35.648 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - null null
+2026-05-26 17:44:35.648 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - 200 1061536 text/javascript 43.1889ms
+2026-05-26 17:44:35.648 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - null null
+2026-05-26 17:44:35.649 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - null null
+2026-05-26 17:44:35.649 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - null null
+2026-05-26 17:44:35.649 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - null null
+2026-05-26 17:44:35.650 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.650 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - 200 1061536 text/javascript 1.4499ms
+2026-05-26 17:44:35.652 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.652 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-bundle.js - 200 1061536 text/javascript 3.3342ms
+2026-05-26 17:44:35.653 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.654 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.654 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - 200 312163 text/javascript 4.6982ms
+2026-05-26 17:44:35.654 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.654 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - 200 312163 text/javascript 5.6849ms
+2026-05-26 17:44:35.654 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-05-26 17:44:35.655 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - 200 312163 text/javascript 5.6371ms
+2026-05-26 17:44:35.656 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger-ui-standalone-preset.js - 200 312163 text/javascript 6.0625ms
+2026-05-26 17:44:35.768 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - null null
+2026-05-26 17:44:35.768 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - null null
+2026-05-26 17:44:35.769 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - null null
+2026-05-26 17:44:35.769 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - null null
+2026-05-26 17:44:35.787 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 18.4474ms
+2026-05-26 17:44:35.787 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 18.2083ms
+2026-05-26 17:44:35.787 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 17.9385ms
+2026-05-26 17:44:35.787 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5044/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 18.7167ms
+2026-05-26 18:00:00.542 +03:00 [INF] >>> Running PledgeExpirationJob (Quantity-Aware)...
+2026-05-26 18:00:08.821 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-1-eu-central-1.pooler.supabase.com:5432'.
+2026-05-26 18:00:08.853 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Tawasol.Infrastructure.Persistence.AppDbContext'.
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "postgres"
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "postgres"
+2026-05-26 18:15:39.086 +03:00 [ERR] An error occurred using the connection to database 'postgres' on server 'tcp://aws-1-eu-central-1.pooler.supabase.com:5432'.
+2026-05-26 18:18:16.127 +03:00 [INF] Executed DbCommand (96ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:18:16.338 +03:00 [INF] Executed DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-26 18:18:16.530 +03:00 [INF] Executed DbCommand (164ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-05-26 18:18:16.599 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-05-26 18:18:16.668 +03:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-05-26 18:18:16.737 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:18:16.747 +03:00 [INF] Applying migration '20260509185446_AddCaseStateMachineAndReports'.
+2026-05-26 18:18:16.836 +03:00 [ERR] Failed executing DbCommand (69ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Cases" (
+    "Id" uniqueidentifier NOT NULL,
+    "Title" nvarchar(200) NOT NULL,
+    "Description" nvarchar(max) NOT NULL,
+    "TargetAmount" decimal(18,2) NOT NULL,
+    "CollectedAmount" decimal(18,2) NOT NULL,
+    "Status" nvarchar(max) NOT NULL,
+    "CaseType" nvarchar(50) NOT NULL,
+    "RejectionReason" nvarchar(max),
+    "ExtraDetails" nvarchar(max) NOT NULL,
+    "CreatedAt" datetime2 NOT NULL,
+    CONSTRAINT "PK_Cases" PRIMARY KEY ("Id")
+);
+2026-05-26 18:20:18.954 +03:00 [INF] Executed DbCommand (100ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:22:25.146 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:22:25.316 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-26 18:22:25.402 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-05-26 18:22:25.471 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-05-26 18:22:25.534 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-05-26 18:22:25.606 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:22:25.615 +03:00 [INF] Applying migration '20260509185446_AddCaseStateMachineAndReports'.
+2026-05-26 18:22:25.728 +03:00 [ERR] Failed executing DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Cases" (
+    "Id" uniqueidentifier NOT NULL,
+    "Title" nvarchar(200) NOT NULL,
+    "Description" nvarchar(max) NOT NULL,
+    "TargetAmount" decimal(18,2) NOT NULL,
+    "CollectedAmount" decimal(18,2) NOT NULL,
+    "Status" nvarchar(max) NOT NULL,
+    "CaseType" nvarchar(50) NOT NULL,
+    "RejectionReason" nvarchar(max),
+    "ExtraDetails" nvarchar(max) NOT NULL,
+    "CreatedAt" datetime2 NOT NULL,
+    CONSTRAINT "PK_Cases" PRIMARY KEY ("Id")
+);
+2026-05-26 18:24:46.243 +03:00 [INF] Executed DbCommand (70ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:24:46.407 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-26 18:24:46.625 +03:00 [INF] Executed DbCommand (193ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-05-26 18:24:46.697 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-05-26 18:24:46.760 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-05-26 18:24:46.828 +03:00 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:24:46.836 +03:00 [INF] Applying migration '20260526152434_InitialPostgresCreate'.
+2026-05-26 18:24:47.453 +03:00 [ERR] Failed executing DbCommand (574ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" uuid NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2026-05-26 18:27:25.430 +03:00 [ERR] Failed executing DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:27:25.609 +03:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-26 18:27:25.716 +03:00 [INF] Executed DbCommand (80ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-05-26 18:27:25.790 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-05-26 18:27:25.856 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-05-26 18:27:26.007 +03:00 [INF] Executed DbCommand (151ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:27:26.015 +03:00 [INF] Applying migration '20260526152434_InitialPostgresCreate'.
+2026-05-26 18:27:26.138 +03:00 [INF] Executed DbCommand (95ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" uuid NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2026-05-26 18:27:26.206 +03:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" uuid NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2026-05-26 18:27:26.273 +03:00 [ERR] Failed executing DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Cases" (
+    "Id" uuid NOT NULL,
+    "Title" character varying(200) NOT NULL,
+    "Description" text NOT NULL,
+    "TargetAmount" numeric(18,2) NOT NULL,
+    "CollectedAmount" numeric(18,2) NOT NULL,
+    "Priority" integer,
+    "Status" text NOT NULL,
+    "CaseType" integer NOT NULL,
+    "RejectionReason" text,
+    "ExtraDetails" nvarchar(max) NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "Location_Latitude" double precision,
+    "Location_Longitude" double precision,
+    "CreatedBy" uuid NOT NULL,
+    "ApprovedBy" uuid,
+    "ApprovedAt" timestamp with time zone,
+    "RejectedBy" uuid,
+    "RejectedAt" timestamp with time zone,
+    "ClosedBy" uuid,
+    "ClosedAt" timestamp with time zone,
+    CONSTRAINT "PK_Cases" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:28.258 +03:00 [INF] Executed DbCommand (136ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:31:42.495 +03:00 [INF] Executed DbCommand (105ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:31:42.651 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-26 18:31:42.744 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2026-05-26 18:31:42.811 +03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-05-26 18:31:42.924 +03:00 [INF] Executed DbCommand (112ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2026-05-26 18:31:42.987 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-05-26 18:31:42.996 +03:00 [INF] Applying migration '20260526153132_InitialPostgresCreate'.
+2026-05-26 18:31:43.102 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" uuid NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:43.186 +03:00 [INF] Executed DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" uuid NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:43.249 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Cases" (
+    "Id" uuid NOT NULL,
+    "Title" character varying(200) NOT NULL,
+    "Description" text NOT NULL,
+    "TargetAmount" numeric(18,2) NOT NULL,
+    "CollectedAmount" numeric(18,2) NOT NULL,
+    "Priority" integer,
+    "Status" text NOT NULL,
+    "CaseType" integer NOT NULL,
+    "RejectionReason" text,
+    "ExtraDetails" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "Location_Latitude" double precision,
+    "Location_Longitude" double precision,
+    "CreatedBy" uuid NOT NULL,
+    "ApprovedBy" uuid,
+    "ApprovedAt" timestamp with time zone,
+    "RejectedBy" uuid,
+    "RejectedAt" timestamp with time zone,
+    "ClosedBy" uuid,
+    "ClosedAt" timestamp with time zone,
+    CONSTRAINT "PK_Cases" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:43.313 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "InKindDonations" (
+    "Id" uuid NOT NULL,
+    "DonorId" uuid NOT NULL,
+    "CaseItemId" uuid NOT NULL,
+    "ItemCondition" integer NOT NULL,
+    "Quantity" integer NOT NULL,
+    "Status" integer NOT NULL,
+    "EvidencePhotoUrl" text,
+    "DeliveryPhotoUrl" text,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_InKindDonations" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:43.377 +03:00 [INF] Executed DbCommand (64ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "FullName" character varying(150) NOT NULL,
+    "PhoneNumber" character varying(20) NOT NULL,
+    "Points" integer NOT NULL,
+    "VerifiedDeliveriesCount" integer NOT NULL,
+    "DeviceToken" text,
+    "Role" character varying(20) NOT NULL,
+    "IsActive" boolean NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:43.454 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Wallets" (
+    "Id" uuid NOT NULL,
+    "Category" text NOT NULL,
+    "Balance" numeric(18,2) NOT NULL,
+    CONSTRAINT "PK_Wallets" PRIMARY KEY ("Id")
+);
+2026-05-26 18:31:43.520 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "RoleId" uuid NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:43.585 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" uuid NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:43.649 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" text NOT NULL,
+    "ProviderKey" text NOT NULL,
+    "ProviderDisplayName" text,
+    "UserId" uuid NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:43.713 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" uuid NOT NULL,
+    "RoleId" uuid NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:43.776 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" uuid NOT NULL,
+    "LoginProvider" text NOT NULL,
+    "Name" text NOT NULL,
+    "Value" text,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:43.863 +03:00 [INF] Executed DbCommand (86ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "CaseAttachment" (
+    "Id" uuid NOT NULL,
+    "CaseId" uuid NOT NULL,
+    "FileName" character varying(255) NOT NULL,
+    "FilePath" character varying(500) NOT NULL,
+    "FileType" character varying(100) NOT NULL,
+    "UploadDate" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_CaseAttachment" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_CaseAttachment_Cases_CaseId" FOREIGN KEY ("CaseId") REFERENCES "Cases" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:43.973 +03:00 [INF] Executed DbCommand (109ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "CaseItems" (
+    "Id" uuid NOT NULL,
+    "CaseId" uuid NOT NULL,
+    "Name" character varying(200) NOT NULL,
+    "Description" text NOT NULL,
+    "Type" text NOT NULL,
+    "TargetAmount" numeric(18,2) NOT NULL,
+    "PledgedAmount" integer NOT NULL,
+    "FulfilledAmount" integer NOT NULL,
+    "Status" integer NOT NULL,
+    CONSTRAINT "PK_CaseItems" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_CaseItems_Cases_CaseId" FOREIGN KEY ("CaseId") REFERENCES "Cases" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:44.036 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "VerificationReports" (
+    "Id" uuid NOT NULL,
+    "CaseId" uuid NOT NULL,
+    "ResearcherId" uuid NOT NULL,
+    "FieldNotes" text NOT NULL,
+    "IsUrgent" boolean NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_VerificationReports" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_VerificationReports_Cases_CaseId" FOREIGN KEY ("CaseId") REFERENCES "Cases" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:44.112 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Donations" (
+    "Id" uuid NOT NULL,
+    "DonorId" uuid NOT NULL,
+    "Type" text NOT NULL,
+    "Status" text NOT NULL,
+    "Amount" numeric(18,2),
+    "CaseId" uuid,
+    "CaseItemId" uuid,
+    "WalletId" uuid,
+    "ProofPictureUrl" text,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Donations" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Donations_Users_DonorId" FOREIGN KEY ("DonorId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2026-05-26 18:31:44.176 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Notifications" (
+    "Id" uuid NOT NULL,
+    "UserId" uuid NOT NULL,
+    "Title" character varying(200) NOT NULL,
+    "Message" text NOT NULL,
+    "IsRead" boolean NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Notifications" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Notifications_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+2026-05-26 18:31:44.241 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Transactions" (
+    "Id" uuid NOT NULL,
+    "DonorId" uuid NOT NULL,
+    "CaseId" uuid,
+    "Amount" numeric(18,2) NOT NULL,
+    "Status" character varying(20) NOT NULL,
+    "ProofPictureUrl" text NOT NULL,
+    "TransactionDate" timestamp with time zone NOT NULL,
+    "ReferenceNumber" character varying(100) NOT NULL,
+    CONSTRAINT "PK_Transactions" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Transactions_Cases_CaseId" FOREIGN KEY ("CaseId") REFERENCES "Cases" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Transactions_Users_DonorId" FOREIGN KEY ("DonorId") REFERENCES "Users" ("Id") ON DELETE RESTRICT
+);
+2026-05-26 18:31:44.313 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
+2026-05-26 18:31:44.381 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
+2026-05-26 18:31:44.442 +03:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
+2026-05-26 18:31:44.505 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
+2026-05-26 18:31:44.566 +03:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
+2026-05-26 18:31:44.628 +03:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
+2026-05-26 18:31:44.691 +03:00 [INF] Executed DbCommand (61ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
+2026-05-26 18:31:44.753 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_CaseAttachment_CaseId" ON "CaseAttachment" ("CaseId");
+2026-05-26 18:31:44.827 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_CaseItems_CaseId" ON "CaseItems" ("CaseId");
+2026-05-26 18:31:44.891 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Donations_DonorId" ON "Donations" ("DonorId");
+2026-05-26 18:31:45.020 +03:00 [INF] Executed DbCommand (129ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Notifications_UserId" ON "Notifications" ("UserId");
+2026-05-26 18:31:45.097 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Transactions_CaseId" ON "Transactions" ("CaseId");
+2026-05-26 18:31:45.161 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Transactions_DonorId" ON "Transactions" ("DonorId");
+2026-05-26 18:31:45.235 +03:00 [INF] Executed DbCommand (73ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_VerificationReports_CaseId" ON "VerificationReports" ("CaseId");
+2026-05-26 18:31:45.298 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20260526153132_InitialPostgresCreate', '10.0.7');

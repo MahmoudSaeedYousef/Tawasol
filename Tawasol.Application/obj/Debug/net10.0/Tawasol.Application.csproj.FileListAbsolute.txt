@@ -1,0 +1,16 @@
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/bin/Debug/net10.0/Tawasol.Application.deps.json
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/bin/Debug/net10.0/Tawasol.Application.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/bin/Debug/net10.0/Tawasol.Application.pdb
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/bin/Debug/net10.0/Tawasol.Domain.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/bin/Debug/net10.0/Tawasol.Domain.pdb
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.csproj.AssemblyReference.cache
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.AssemblyInfoInputs.cache
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.AssemblyInfo.cs
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.csproj.CoreCompileInputs.cache
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol..E437D263.Up2Date
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/refint/Tawasol.Application.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.pdb
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/ref/Tawasol.Application.dll
+/Users/mahmoudsaeed/Documents/projects/TWASUL/tawasol.sys/Tawasol.Application/obj/Debug/net10.0/Tawasol.Application.sourcelink.json

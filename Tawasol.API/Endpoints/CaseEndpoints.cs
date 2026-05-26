@@ -9,10 +9,12 @@ using Tawasol.Application.Features.Cases.Commands.ApproveCase;
 using Tawasol.Application.Features.Cases.Commands.CloseCase;
 using Tawasol.Application.Features.Cases.Commands.CreateCase;
 using Tawasol.Application.Features.Cases.Commands.RejectCase;
+using Tawasol.Application.Features.Cases.Commands.RequestResearchCase;
 using Tawasol.Application.Features.Cases.Commands.SubmitFieldReport;
 using Tawasol.Application.Features.Cases.Queries.GetCaseById;
 using Tawasol.Application.Features.Cases.Queries.GetCases;
 using Tawasol.Application.Features.Cases.Queries.GetResearcherTasks;
+using Tawasol.Application.Features.Cases.Queries.GetVillageStats;
 using Tawasol.Domain.Enums;
 
 namespace Tawasol.API.Endpoints;
@@ -28,6 +30,7 @@ public static class CaseEndpoints
                 [FromQuery] string? statuses,
                 [FromQuery] string? searchTerm,
                 [FromQuery] string? categoryFilter,
+                [FromQuery] bool? isUrgent,
                 ISender mediator,
                 [FromQuery] int pageNumber = 1,
                 [FromQuery] int pageSize = 10) =>
@@ -44,32 +47,36 @@ public static class CaseEndpoints
                         }
                     }
                 }
-                var query = new GetCasesQuery(caseStatuses,searchTerm, categoryFilter, new PaginationParams(pageNumber, pageSize));
+                var query = new GetCasesQuery(caseStatuses,searchTerm, categoryFilter, isUrgent, new PaginationParams(pageNumber, pageSize));
                 var result = await mediator.Send(query);
                 return Results.Ok(result);
             })
             .WithName("GetCases");
+        
+        group.MapGet("/village-stats", async (ISender mediator) =>
+            {
+                var result = await mediator.Send(new GetVillageStatsQuery());
+                return Results.Ok(result);
+            })
+            .WithName("GetVillageStats");
 
         group.MapPost("/", async (HttpRequest request, [FromForm] CreateCaseCommand command, ClaimsPrincipal user, ISender mediator) =>
             {
-                // 1. التأكد من الهوية كالعادة
                 var userIdClaim = user.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (string.IsNullOrEmpty(userIdClaim)) return Results.Unauthorized();
 
-                // 2. 🚀 الحل السحري: اسحب كل الملفات المرفقة في الـ Request وحطها في الـ Command
-                // الطريقة دي بتضمن إن أي ملف مبعوث يوصل، بقطع النظر عن الـ Key Name في فلاتر
                 if (request.HasFormContentType)
                 {
                     command.Attachments = request.Form.Files.ToList();
                 }
 
-                // 3. حقن الـ UserId
                 command.CreatedBy = Guid.Parse(userIdClaim);
 
                 var result = await mediator.Send(command);
                 return Results.Ok(result);
             })
-            .RequireAuthorization(policy => policy.RequireRole("GeneralUser"))
+            // 🚀 السماح للـ الباحث والـ الحكيم والـ الأدمن بإنشاء الحالات
+            .RequireAuthorization(policy => policy.RequireRole("Researcher", "Hakim", "GeneralUser"))
             .DisableAntiforgery()
             .WithName("CreateCase");
 
@@ -137,5 +144,14 @@ public static class CaseEndpoints
                     return Results.Ok(result);
                 })
             .WithName("CloseCase");
+        
+        group.MapPatch("/{id:guid}/requestFieldResearch", [Authorize(Roles = "Hakim")]
+                async (Guid id, ClaimsPrincipal user, ISender mediator) =>
+                {
+                    var closedBy = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                    var result = await mediator.Send(new RequestResearchCaseCommand(id, closedBy));
+                    return Results.Ok(result);
+                })
+            .WithName("RequestFieldResearchCase");
     }
 }

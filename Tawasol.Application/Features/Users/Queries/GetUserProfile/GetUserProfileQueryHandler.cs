@@ -1,31 +1,42 @@
+using System.Collections.Generic;
+using System.Linq;
 using MediatR;
 using Tawasol.Application.Common.Models;
 using Tawasol.Application.DTOs.Users;
+using Tawasol.Domain.Enums;
 using Tawasol.Domain.Interfaces.Repositories;
 
-namespace Tawasol.Application.Features.Users.Queries.GetUserProfile;
-
-public class GetUserProfileQueryHandler(
-    IUserRepository userRepository,
-    ITransactionRepository transactionRepository)
-    : IRequestHandler<GetUserProfileQuery, Result<UserProfileDto>>
+namespace Tawasol.Application.Features.Users.Queries.GetUserProfile
 {
-    public async Task<Result<UserProfileDto>> Handle(GetUserProfileQuery request, CancellationToken ct)
+    public class GetUserProfileQueryHandler(
+        IUserRepository userRepository,
+        ITransactionRepository transactionRepository)
+        : IRequestHandler<GetUserProfileQuery, Result<UserProfileDto>>
     {
-        var user = await userRepository.GetByIdAsync(request.UserId, ct);
-        if (user == null) return Result<UserProfileDto>.Failure("User not found.");
+        public async Task<Result<UserProfileDto>> Handle(GetUserProfileQuery request, CancellationToken ct)
+        {
+            var user = await userRepository.GetByIdAsync(request.UserId, ct);
+            if (user == null) return Result<UserProfileDto>.Failure("User not found.");
 
-        var transactions = await transactionRepository.GetByDonorIdAsync(user.Id, ct);
-        var donationsCount = transactions.Count();
+            var transactions = await transactionRepository.GetByDonorIdAsync(user.Id, ct);
+            var donationsCount = transactions.Count();
 
-        var profile = new UserProfileDto(
-            user.Id,
-            user.FullName,
-            user.PhoneNumber,
-            user.Points,
-            user.GetTitle(),
-            donationsCount);
+            var badges = new List<string>();
+            if (user.Role == UserRole.Researcher && user.VerifiedDeliveriesCount > 10)
+            {
+                badges.Add("حارس القرية");
+            }
 
-        return Result<UserProfileDto>.Success(profile);
+            var profile = new UserProfileDto(
+                user.Id,
+                user.FullName,
+                user.PhoneNumber,
+                user.Points,
+                user.GetTitle(),
+                donationsCount,
+                badges);
+
+            return Result<UserProfileDto>.Success(profile);
+        }
     }
 }

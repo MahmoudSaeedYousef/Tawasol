@@ -29,7 +29,7 @@ public class DonateToFundCommandHandler(
         // At verification time, the wallet balance will be updated.
         // But the requirement says "Update balance" here or in Verify?
         // Usually, verification updates balance. Let's keep consistency with the Verify logic.
-        
+        await walletRepository.AddAsync(wallet, ct); // 👈 هنا الـ EF Core بدأ يعمل Tracking للـ Wallet
         await unitOfWork.SaveChangesAsync(ct);
         return Result<Guid>.Success(donation.Id, "Fund donation submitted for verification.");
     }

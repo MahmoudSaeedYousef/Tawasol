@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Tawasol.Domain.Enums;
-using Tawasol.Infrastructure.Identity;
+using Tawasol.Domain.Entities;
+using Tawasol.Domain.Enums; // تأكد من مسار الـ Namespace للـ User والـ UserRole
 
 namespace Tawasol.Infrastructure.Persistence;
 
@@ -10,8 +10,12 @@ public static class IdentityDataSeeder
     public static async Task SeedDataAsync(IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        
+        // 🚀 التحديث السحري: جلب الـ UserManager الخاص بالـ User Domain Entity
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+        
+        // استخدام IdentityRole<Guid> لأن الـ User شغال بـ Guid
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
         // 1. Seed Roles
         var roles = Enum.GetNames<UserRole>();
@@ -19,7 +23,7 @@ public static class IdentityDataSeeder
         {
             if (!await roleManager.RoleExistsAsync(role))
             {
-                await roleManager.CreateAsync(new IdentityRole(role));
+                await roleManager.CreateAsync(new IdentityRole<Guid>(role));
             }
         }
 
@@ -29,20 +33,29 @@ public static class IdentityDataSeeder
 
         if (adminUser == null)
         {
-            var newAdmin = new ApplicationUser
-            {
-                UserName = adminPhone,
-                PhoneNumber = adminPhone,
-                FullName = "System Admin",
-                Points = 1000,
-                PhoneNumberConfirmed = true
-            };
+            // 🚀 احترام الـ Domain Rules: بناء الـ Admin عن طريق الـ Constructor النظيف بتاعه
+            var newAdmin = new User(
+                fullName: "System Admin",
+                phoneNumber: adminPhone,
+                role: UserRole.Hakim
+            );
 
+            // بما إن الـ Points محروقة بـ private set وبتبدأ بـ 0، هنرفعها للـ Admin عن طريق ميثود الـ Domain
+            newAdmin.AddPoints(1000); 
+            newAdmin.PhoneNumberConfirmed = true; // خاصية موروثه من مايكروسوفت نرفعها عادي
+
+            // كريت الـ User جوه جداول الـ Identity مع الباسورد
             var result = await userManager.CreateAsync(newAdmin, "000000");
 
             if (result.Succeeded)
             {
+                // ربط الحكيم بالـ Role بتاعته رسمياً
                 await userManager.AddToRoleAsync(newAdmin, nameof(UserRole.Hakim));
+            }
+            else
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception($"Failed to seed Admin User: {errors}");
             }
         }
     }

@@ -1,65 +1,74 @@
+using System;
 using Tawasol.Domain.Enums;
 using Tawasol.Domain.Exceptions;
 
-namespace Tawasol.Domain.Entities;
-
-public class User
+namespace Tawasol.Domain.Entities
 {
-    public Guid Id { get; private set; }
-    public string FullName { get; private set; }
-    public string PhoneNumber { get; private set; }
-    public int Points { get; private set; }
-    public string? DeviceToken { get; private set; }
-    public UserRole Role { get; private set; }
-    public bool IsActive { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-
-    private User() { }
-
-    public User(string fullName, string phoneNumber, UserRole role)
+    public class User
     {
-        if (string.IsNullOrWhiteSpace(fullName))
-            throw new DomainException("Full name is required.");
-        if (string.IsNullOrWhiteSpace(phoneNumber))
-            throw new DomainException("Phone number is required.");
+        public Guid Id { get; private set; }
+        public string FullName { get; private set; }
+        public string PhoneNumber { get; private set; }
+        public int Points { get; private set; }
+        public int VerifiedDeliveriesCount { get; private set; }
+        public string? DeviceToken { get; private set; }
+        public UserRole Role { get; private set; }
+        public bool IsActive { get; private set; }
+        public DateTime CreatedAt { get; private set; }
 
-        Id = Guid.NewGuid();
-        FullName = fullName;
-        PhoneNumber = phoneNumber;
-        Role = role;
-        Points = 0;
-        IsActive = true;
-        CreatedAt = DateTime.UtcNow;
-    }
+        private User() { }
 
-    public void UpdateDeviceToken(string token)
-    {
-        DeviceToken = token;
-    }
-
-    public string GetTitle()
-    {
-        return Points switch
+        public User(string fullName, string phoneNumber, UserRole role)
         {
-            <= 100 => "جار الخير",
-            <= 500 => "سند القرية",
-            _ => "كريم القرية"
-        };
-    }
+            if (string.IsNullOrWhiteSpace(fullName))
+                throw new DomainException("Full name is required.");
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+                throw new DomainException("Phone number is required.");
 
-    public void AddPoints(int amount)
-    {
-        if (amount < 0) throw new DomainException("Points cannot be negative.");
-        Points += amount;
-    }
+            Id = Guid.NewGuid();
+            FullName = fullName;
+            PhoneNumber = phoneNumber;
+            Role = role;
+            Points = 0;
+            VerifiedDeliveriesCount = 0;
+            IsActive = true;
+            CreatedAt = DateTime.UtcNow;
+        }
 
-    public void Deactivate()
-    {
-        IsActive = false;
-    }
+        public void UpdateDeviceToken(string token)
+        {
+            DeviceToken = token;
+        }
 
-    public void Activate()
-    {
-        IsActive = true;
+        public string GetTitle()
+        {
+            return Points switch
+            {
+                <= 100 => "جار الخير",
+                <= 500 => "سند القرية",
+                _ => "كريم القرية"
+            };
+        }
+
+        public void AddPoints(int amount)
+        {
+            if (amount < 0) throw new DomainException("Points cannot be negative.");
+            Points += amount;
+        }
+
+        public void IncrementVerifiedDeliveries()
+        {
+            VerifiedDeliveriesCount++;
+        }
+
+        public void Deactivate()
+        {
+            IsActive = false;
+        }
+
+        public void Activate()
+        {
+            IsActive = true;
+        }
     }
 }

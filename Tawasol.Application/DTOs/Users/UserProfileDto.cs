@@ -1,9 +1,15 @@
-namespace Tawasol.Application.DTOs.Users;
+using System.Collections.Generic;
+using Tawasol.Domain.Enums;
 
-public record UserProfileDto(
-    Guid Id,
-    string FullName,
-    string PhoneNumber,
-    int Points,
-    string Title,
-    int TotalDonationsCount);
+namespace Tawasol.Application.DTOs.Users
+{
+    public record UserProfileDto(
+        Guid Id,
+        string FullName,
+        string PhoneNumber,
+        int Points,
+        string Title,
+        int TotalDonationsCount,
+        List<string> Badges
+    );
+}

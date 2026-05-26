@@ -2,45 +2,59 @@ using AutoMapper;
 using MediatR;
 using Tawasol.Application.Common.Models;
 using Tawasol.Application.DTOs.Cases;
+using Tawasol.Application.Features.Cases.Commands.CreateCase;
 using Tawasol.Application.Interfaces.Services;
 using Tawasol.Domain.Entities;
-using Tawasol.Domain.Enums;
 using Tawasol.Domain.Interfaces;
 using Tawasol.Domain.Interfaces.Repositories;
+using Tawasol.Domain.ValueObjects;
 
-namespace Tawasol.Application.Features.Cases.Commands.CreateCase;
 public class CreateCaseCommandHandler(
     ICaseRepository caseRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper,
-    IFileService fileService) // 👈 حقن خدمة الملفات
+    IFileService fileService)
     : IRequestHandler<CreateCaseCommand, Result<CaseResponseDto>>
 {
     public async Task<Result<CaseResponseDto>> Handle(CreateCaseCommand request, CancellationToken ct)
     {
-        var @case = new Case(
-            request.Title, 
-            request.Description, 
-            request.TargetAmount, 
-            request.CaseType, 
-            request.CreatedBy, 
-            request.ExtraDetails);
-        
-        // 1. إضافة البنود
-        foreach (var item in request.CaseItems)
+        Location? location = null;
+        if (request.Latitude != 0 || request.Longitude != 0)
         {
-            @case.AddItem(item.Name, "Item Description", request.CaseType, item.EstimatedCost);
+            location = new Location(request.Latitude, request.Longitude);
         }
 
-        // 2. معالجة وحفظ الصور 🚀
+        var @case = new Case(
+                request.Title,
+                request.Description,
+                0, // CollectedAmount يبدأ بصفر
+                request.TargetAmount,
+                request.CaseType,
+                request.CreatedBy, 
+                location,
+                request.ExtraDetails);
+        
+        // 1. إضافة البنود العينية بالكميات الجديدة
+        foreach (var item in request.CaseItems)
+        {
+            // 🚀 التعديل الإستراتيجي 2: تمرير الـ item.TargetAmount (الكمية الإلزامية للـ Domain)
+            // تأكد إن ميثود AddItem جوه الـ Case Entity مصلحة لتستقبل الـ int وتمرره للـ Constructor
+            @case.AddItem(
+                name: item.Name, 
+                description: "Item Description", 
+                type: request.CaseType, 
+                targetAmount: item.TargetAmount, // 👈 باصي الكمية هنا بالملي
+                estimatedCost: item.EstimatedCost
+            );
+        }
+
+        // 2. معالجة وحفظ المرفقات والصور
         if (request.Attachments != null && request.Attachments.Any())
         {
             foreach (var file in request.Attachments)
             {
-                // حفظ الملف في المسار الفيزيائي
                 var relativePath = await fileService.SaveFileAsync(file, "cases");
 
-                // تسجيل المرفق في الـ Domain Entity
                 @case.AddAttachment(
                     fileName: file.FileName,
                     filePath: relativePath, 
@@ -50,6 +64,8 @@ public class CreateCaseCommandHandler(
         }
         
         await caseRepository.AddAsync(@case, ct);
+        
+        // حفظ كل شيء في سياق AppDbContext الموحد والنظيف 💎
         await unitOfWork.SaveChangesAsync(ct);
         
         var response = mapper.Map<CaseResponseDto>(@case);
